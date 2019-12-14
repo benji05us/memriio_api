@@ -22,7 +22,7 @@ app.use(cors())
 
 
 app.get('/',(req,res) =>{
-    res.json(db.users)
+    res.json('memriio is live')
 })
 
 app.post('/signin',(req,res) => {
@@ -181,8 +181,6 @@ app.post('/searchuser',(req,res) =>{
         })
     .catch(err=> res.status(400).json('error searching memories'))
 })
-
-
 
 
 app.listen(process.env.PORT || 3000,()=> {
