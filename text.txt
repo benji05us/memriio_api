@@ -1,0 +1,5 @@
+.union(function(){
+                this.select('*').from('memories').wherein('id',function(){
+                    this.select('memid').from('memassociates').where('keywords','like',words).andwhere({groupid:0,userid:user})
+                })
+            })
