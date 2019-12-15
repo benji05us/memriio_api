@@ -26,9 +26,10 @@ app.get('/',(req,res) =>{
 
 app.post('/signin',(req,res) => {
     
+    console.log('Sign-in: ',req.body.email) 
     db.select('email','hash').from('login').where({email:req.body.email})
         .then(data=>{
-        console.log('signing: ',req.body.email)    
+           
         const isValid = bcrypt.compareSync(req.body.password,data[0].hash)
         
         if(isValid){
@@ -38,7 +39,7 @@ app.post('/signin',(req,res) => {
             }).catch(err => res.status(400).json('Error Signing In'))  
         }else{
             res.status(401).json('Wrong credentials')
-        }``
+        }
     }).catch(err=> res.status(400).json('wrong Credentials'))
 })
 
@@ -49,7 +50,8 @@ app.post('/register',(req,res) => {
     db.transaction(trx =>{
         trx.insert({
             hash:hash,
-            email: email
+            email:email,
+            password:password
         })
         .into('login')
         .returning('email')
