@@ -27,7 +27,7 @@ app.post('/signin',(req,res) => {
     
     db.select('email','hash').from('login').where({email:req.body.email})
         .then(data=>{
-            
+        console.log('signing: ',req.body.email)    
         const isValid = bcrypt.compareSync(req.body.password,data[0].hash)
         
         if(isValid){
@@ -44,7 +44,7 @@ app.post('/signin',(req,res) => {
 app.post('/register',(req,res) => {
     const {email,firstname,lastname,password} = req.body
     const hash = bcrypt.hashSync(password)
-    // use transactions to guarenty success accross two tables
+    // use transactions to guarentee success accross two tables
     db.transaction(trx =>{
         trx.insert({
             hash:hash,
