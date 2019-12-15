@@ -20,8 +20,8 @@ app.use(cors())
 
 
 app.get('/',(req,res) =>{
-    res.json('memriio is live')
-    console.log('console works')
+    res.json('memriio is live : 2')
+    console.log('c')
 })
 
 app.post('/signin',(req,res) => {
