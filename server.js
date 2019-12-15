@@ -21,6 +21,7 @@ app.use(cors())
 
 app.get('/',(req,res) =>{
     res.json('memriio is live')
+    console.log('console works')
 })
 
 app.post('/signin',(req,res) => {
