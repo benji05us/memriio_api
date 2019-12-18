@@ -3,9 +3,10 @@ const bparser = require('body-parser')
 const bcrypt = require('bcrypt-nodejs')
 const cors = require('cors');
 const knex = require('knex')
-const AWS = require('aws-sdk')
-const uuidv4 = require('uuid/v4')
+//const aws = require('aws-sdk')
 
+
+//require('dotenv').config(); // Configure dotenv to load in the .env file
 const db = knex({
     client: 'pg',
     connection: {
@@ -23,21 +24,6 @@ app.use(cors())
 
 app.get('/',(req,res) =>{
     res.json('memriio is live : 2')
-})
-
-app.post('/uploadurl',(req,res) =>{
-    const bucket = process.env.S3_BUCKET;
-    const key = `${bucket}/${uuidv4()}`
-    const url = await AWS.s3
-        .getSignedUrl('putObject',{
-            Bucket: bucket,
-            key: key,
-            ContentType: 'image/*',
-            Expires: 300,
-        })
-        .promise();
-    res.json(url)
-
 })
 
 app.post('/signin',(req,res) => {
