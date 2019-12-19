@@ -1,12 +1,11 @@
 const express = require('express')
 const bparser = require('body-parser')
 const bcrypt = require('bcrypt-nodejs')
-const cors = require('cors');
+const cors = require('cors')
 const knex = require('knex')
 //const aws = require('aws-sdk')
-
-
 //require('dotenv').config(); // Configure dotenv to load in the .env file
+
 const db = knex({
     client: 'pg',
     connection: {
@@ -17,13 +16,12 @@ const db = knex({
 
 
 const app = express();
-
 app.use(bparser.json());
-app.use(cors())
+app.use(cors());
 
 
 app.get('/',(req,res) =>{
-    res.json('memriio is live : 2')
+    res.json('memriio is live : 3')
 })
 
 app.post('/signin',(req,res) => {
