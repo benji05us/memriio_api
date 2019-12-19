@@ -21,7 +21,7 @@ app.use(cors());
 
 
 app.get('/',(req,res) =>{
-    res.json('memriio is live : 3')
+    res.json('memriio is live : with aws')
 })
 
 app.post('/signin',(req,res) => {
