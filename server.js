@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt-nodejs')
 const cors = require('cors')
 const knex = require('knex')
 const aws = require('aws-sdk')
-//require('dotenv').config(); // Configure dotenv to load in the .env file
+require('dotenv').config(); // Configure dotenv to load in the .env file
 
 const db = knex({
     client: 'pg',
@@ -21,7 +21,7 @@ app.use(cors());
 
 
 app.get('/',(req,res) =>{
-    res.json('memriio is live : with aws')
+    res.json('memriio is live : aws + dotenv')
 })
 
 app.post('/signin',(req,res) => {
