@@ -191,6 +191,9 @@ aws.config.update({
   const S3_BUCKET = process.env.S3_BUCKET
   // Now lets export this function so we can call it from somewhere else
   exports.getSignedURL = (req,res) => {
+    
+    console.log('made it to getSignedURL',req.body);
+    
     const s3 = new aws.S3();  // Create a new instance of S3
     const fileName = req.body.fileName;
     const fileType = req.body.fileType;
