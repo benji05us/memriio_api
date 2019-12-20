@@ -182,15 +182,18 @@ app.post('/searchuser',(req,res) =>{
         })
     .catch(err=> res.status(400).json('error searching memories'))
 })
+
 aws.config.update({
     region: 'us-east-1', // Put your aws region here
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  })
+})
   
   const S3_BUCKET = process.env.S3_BUCKET
   // Now lets export this function so we can call it from somewhere else
-  exports.getSignedURL = (req,res) => {
+
+
+  export function etSignedURL(req,res)  {
     
     console.log('made it to getSignedURL',req.body);
     
