@@ -81,7 +81,7 @@ app.post('/register',(req,res) => {
     
 })
 
-app.post ('/signedURL',(req,res) =>{
+app.post ('/signedurl',(req,res) =>{
 
     console.log('made it to getSignedURL', req.body);
     const s3 = new aws.S3(); // Create a new instance of S3
