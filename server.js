@@ -14,6 +14,14 @@ const db = knex({
     }
 });
 
+aws.config.update({
+    region: 'us-east-1', 
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+})
+  
+const S3_BUCKET = process.env.S3_BUCKET
+
 
 const app = express();
 app.use(bparser.json());
@@ -21,7 +29,7 @@ app.use(cors());
 
 
 app.get('/',(req,res) =>{
-    res.json('memriio is live : getsignedfileURL')
+    res.json('memriio is live : getsignedfileURL 2')
 })
 
 app.post('/signin',(req,res) => {
@@ -183,17 +191,9 @@ app.post('/searchuser',(req,res) =>{
     .catch(err=> res.status(400).json('error searching memories'))
 })
 
-aws.config.update({
-    region: 'us-east-1', // Put your aws region here
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-})
-  
-  const S3_BUCKET = process.env.S3_BUCKET
-  // Now lets export this function so we can call it from somewhere else
 
 
-  export function etSignedURL(req,res)  {
+  export function getSignedURL(req,res)  {
     
     console.log('made it to getSignedURL',req.body);
     
