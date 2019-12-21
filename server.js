@@ -25,10 +25,13 @@ const app = express();
 app.use(bparser.json());
 app.use(cors());
 
+// root ----------------------
 
 app.get('/',(req,res) =>{
     res.json('memriio is live : getsignedfileURL 3')
 })
+
+// signin ----------------------
 
 app.post('/signin',(req,res) => {
     
@@ -48,6 +51,8 @@ app.post('/signin',(req,res) => {
         }
     }).catch(err=> res.status(400).json('wrong Credentials'))
 })
+
+// register ----------------------------------------------------------------
 
 app.post('/register',(req,res) => {
     const {email,firstname,lastname,password} = req.body
@@ -81,13 +86,19 @@ app.post('/register',(req,res) => {
     
 })
 
+// get signed URL FROM AWS ----------------------------------------------------------------
+
 app.post ('/signedurl',(req,res) =>{
 
     console.log('made it to getSignedURL', req.body);
+
     const s3 = new aws.S3(); // Create a new instance of S3
     const fileName = req.body.fileName;
     const fileType = req.body.fileType;
     // Set up the payload of what we are sending to the S3 api
+
+    console.log('filename :',fileName)
+
     const s3Params = {
         Bucket: S3_BUCKET,
         Key: fileName,
@@ -99,22 +110,27 @@ app.post ('/signedurl',(req,res) =>{
     // can use to upload our file
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
         if (err) {
-            console.log(err);
+            console.log('Error in s3.getSignedURL',err);
             res.json({ success: false, error: err });
+        }else{
+            // Data payload of what we are sending back, the url 
+            // of the signedRequest and a URL where we can 
+            // access the content after its saved. 
+            console.log('s3.getSignedURL worked',data);
+            
+            const returnData = {
+
+                signedRequest: data,
+                url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+            };
+            // Send it all back
+            res.json({ success: true, data: { returnData } });
         }
-        // Data payload of what we are sending back, the url 
-        // of the signedRequest and a URL where we can 
-        // access the content after its saved. 
-        const returnData = {
-            signedRequest: data,
-            url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-        };
-        // Send it all back
-        res.json({ success: true, data: { returnData } });
     });
 
 })
 
+// post ----------------------------------------------------------------
 
 app.post('/post',(req,res) => {
     const {ispersonal,userid,groupid} = req.body
@@ -133,6 +149,8 @@ app.post('/post',(req,res) => {
         .catch(err=> res.status(400).json('unable to post memory'))
 })
 
+// associate ----------------------------------------------------------------
+
 app.post('/associate',(req,res) => {
     const {memid,keyword} = req.body
     
@@ -147,6 +165,8 @@ app.post('/associate',(req,res) => {
         })
         .catch(err=> res.status(400).json('unable to associate'))
 })
+
+// profile/id ----------------------------------------------------------------
 
 app.get('/profile/:id',(req,res) =>{
 
@@ -163,6 +183,8 @@ app.get('/profile/:id',(req,res) =>{
     
 })
 
+// memory/id ----------------------------------------------------------------
+
 app.get('/memory/:id',(req,res) =>{
 
     const { id } = req.params;
@@ -176,6 +198,8 @@ app.get('/memory/:id',(req,res) =>{
     })
     .catch(err=> res.status(400).json('error getting user memory'))
 })
+
+// search ----------------------------------------------------------------
 
 app.post('/search',(req,res) =>{
 
@@ -207,6 +231,8 @@ app.post('/search',(req,res) =>{
     .catch(err=> res.status(400).json('no memories found'))
 })
 
+// search user ----------------------------------------------------------------
+
 app.post('/searchuser',(req,res) =>{
 
     const {userid} = req.body
@@ -225,7 +251,7 @@ app.post('/searchuser',(req,res) =>{
 })
 
 
-
+// Listen ----------------------------------------------------------------
 
 app.listen(process.env.PORT || 3000,()=> {
     console.log('app running on port ${process.env.PORT}');
