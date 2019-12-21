@@ -108,7 +108,7 @@ app.post ('/signedurl',(req,res) =>{
     };
     // Make a request to the S3 API to get a signed URL which we 
     // can use to upload our file
-    s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    s3.getSignedUrl('putObject', s3Params, (err, signedURL) => {
         if (err) {
             console.log('Error in s3.getSignedURL',err);
             res.json({ success: false, error: err });
@@ -116,15 +116,18 @@ app.post ('/signedurl',(req,res) =>{
             // Data payload of what we are sending back, the url 
             // of the signedRequest and a URL where we can 
             // access the content after its saved. 
-            console.log('s3.getSignedURL worked',data);
+            
             
             const returnData = {
 
-                signedRequest: data,
+                signedRequest: signedURL,
                 url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
             };
+            console.log('signedURL : ',returnData.signedURL);
+            console.log('url       : ',returnData.url);
+            
             // Send it all back
-            res.json({ success: true, data: { returnData } });
+            res.json( returnData );
         }
     });
 
