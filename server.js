@@ -10,12 +10,12 @@ const db = knex({
     client: 'pg',
     connection: {
       connectionString : process.env.DATABASE_URL,
-      ssl : true
+      ssl : trueÍ
     }
 });
 
 aws.config.update({
-    region: 'us-east-1', 
+    region: process.env.REGION,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
@@ -116,7 +116,6 @@ app.post ('/signedurl',(req,res) =>{
             // Data payload of what we are sending back, the url 
             // of the signedRequest and a URL where we can 
             // access the content after its saved. 
-            
             
             const returnData = {
 
