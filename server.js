@@ -17,7 +17,8 @@ const db = knex({
 aws.config.update({
     region: process.env.REGION,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    signatureVersion: 'v4'
 })
 
 
@@ -35,7 +36,7 @@ app.get('/',(req,res) =>{
 
 app.post('/signin',(req,res) => {
     
-    console.log('Sign-in: ',req.body.email) 
+    
     db.select('email','hash').from('login').where({email:req.body.email})
         .then(data=>{
            
