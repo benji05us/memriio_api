@@ -93,6 +93,8 @@ app.post ('/signedurl',(req,res) =>{
 
     console.log('made it to getSignedURL', req.body);
 
+    
+
     const s3 = new aws.S3(); // Create a new instance of S3
     const fileName = req.body.fileName;
     const fileType = req.body.fileType;
@@ -127,7 +129,7 @@ app.post ('/signedurl',(req,res) =>{
             console.log('url       : ',returnData.url);
             
             // Send it all back
-            res.json( returnData );
+            res.json({s3data:returnData.signedRequest,s3url:returnData.url}) 
         }
     });
 
