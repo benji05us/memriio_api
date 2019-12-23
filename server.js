@@ -129,7 +129,7 @@ app.post ('/signedurl',(req,res) =>{
             console.log('url       : ',returnData.url);
             
             // Send it all back
-            res.json({s3data:returnData.signedRequest,s3url:returnData.url}) 
+            res.json( returnData.url ) 
         }
     });
 
