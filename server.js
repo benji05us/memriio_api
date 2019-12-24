@@ -140,21 +140,59 @@ app.post ('/signedurl',(req,res) =>{
 
 // post ----------------------------------------------------------------
 
-app.post('/post',(req,res) => {
+app.post('/creatememory',(req,res) => {
     const {ispersonal,userid,groupid} = req.body
     
     db('memories')
-        .returning('*')
+        .returning('id')
         .insert({
             createdon:new Date(),
             ispersonal:ispersonal,
             userid:userid,
             groupid:groupid
     })
-        .then(memory=> {
-            res.json(memory[0]);
+        .then(memoryids=> {
+            if(memoryids.length > 0){
+                res.json({
+                    created:true,
+                    id:memoryids[0]
+                })
+            }else{
+                res.json({
+                    created:false,
+                    id:0
+                })
+            }
         })
-        .catch(err=> res.status(400).json('unable to post memory'))
+        .catch(err=> res.status(400).json('unable to create memory'))
+})
+
+// load memory file -------------------------------------------------------------
+
+app.post('/addmemfile',(req,res) => {
+    const {memid,fileurl,isHero} = req.body
+    
+    db('memfiles')
+        .returning('id')
+        .insert({
+            memid:memid,
+            fileurl:fileurl,
+            isHero:isHero
+    })
+    .then(memfiles=> {
+        if(memfiles.length > 0){
+            res.json({
+                wasAdded:true,
+                id:memfiles[0]
+            })
+        }else{
+            res.json({
+                wasAdded:false,
+                id:0
+            })
+        }
+    })
+        .catch(err=> res.status(400).json('unable log memory file reference'))
 })
 
 // associate ----------------------------------------------------------------
