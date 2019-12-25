@@ -181,7 +181,7 @@ app.post('/addmemfile',(req,res) => {
             isHero:isHero
     })
     .then(memfiles=> {
-        console.log('memfiles: ',memfiles);
+        
         if(memfiles.length > 0){
             
             
@@ -196,7 +196,7 @@ app.post('/addmemfile',(req,res) => {
             })
         }
     })
-        .catch(err=> res.status(400).json('unable log memory file reference'))
+        .catch(err=> res.status(423).json('unable log memory file reference'))
 })
 
 // associate ----------------------------------------------------------------
