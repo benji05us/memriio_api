@@ -176,11 +176,12 @@ app.post('/addmemfile',(req,res) => {
     db('memfiles')
         .returning('id')
         .insert({
-            memid:memid,
-            fileurl:fileurl,
-            isHero:isHero
+            memid:8,
+            fileurl:'https://test.test/test.jpg',
+            isHero:true
     })
     .then(memfiles=> {
+        console.log('made it:',memfiles);
         
         if(memfiles.length > 0){
             
