@@ -164,7 +164,7 @@ app.post('/creatememory',(req,res) => {
                 })
             }
         })
-        .catch(err=> res.status(400).json('unable to create memory'))
+        .catch(err=> json(err))
 })
 
 // load memory file -------------------------------------------------------------
@@ -180,13 +180,13 @@ app.post('/addmemfile',(req,res) => {
             fileurl:fileurl,
             isHero:isHero
     })
-    .then(memfiles=> {
+    .then(mfiles=> {
         console.log('made it:',memfiles);
         
-        if(memfiles.length > 0){
+        if(mfiles.length > 0){
             res.json({
                 wasAdded:true,
-                id:memfiles[0]
+                id:mfiles[0]
             })
         }else{
             res.json({
