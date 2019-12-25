@@ -171,6 +171,7 @@ app.post('/creatememory',(req,res) => {
 
 app.post('/addmemfile',(req,res) => {
     const {memid,fileurl,isHero} = req.body
+    console.log(req.body);
     
     db('memfiles')
         .returning('id')
