@@ -181,7 +181,7 @@ app.post('/addmemfile',(req,res) => {
             isHero:isHero
     })
     .then(mfiles=> {
-        console.log('made it:',memfiles);
+        console.log('made it:',mfiles);
         
         if(mfiles.length > 0){
             res.json({
