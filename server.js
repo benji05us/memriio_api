@@ -176,16 +176,14 @@ app.post('/addmemfile',(req,res) => {
     db('memfiles')
         .returning('id')
         .insert({
-            memid:8,
-            fileurl:'https://test.test/test.jpg',
-            isHero:true
+            memid:memid,
+            fileurl:fileurl,
+            isHero:isHero
     })
     .then(memfiles=> {
         console.log('made it:',memfiles);
         
         if(memfiles.length > 0){
-            
-            
             res.json({
                 wasAdded:true,
                 id:memfiles[0]
@@ -197,7 +195,7 @@ app.post('/addmemfile',(req,res) => {
             })
         }
     })
-        .catch(err=> res.status(423).json('unable log memory file reference'))
+        .catch(err=> json(err))
 })
 
 // associate ----------------------------------------------------------------
