@@ -169,7 +169,7 @@ app.post('/addmemfile',(req,res) => {
     
     db.select('*').from('memfiles').then(data =>{
         res.json('success : ', data.id)
-    })
+    }).catch(err=> json(err))
     // db('memfiles')
     //     .returning('id')
     //     .insert({
@@ -191,8 +191,7 @@ app.post('/addmemfile',(req,res) => {
         //     })
         // }
     })
-        .catch(err=> json(err))
-})
+        
 
 // associate ----------------------------------------------------------------
 
