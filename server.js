@@ -167,27 +167,29 @@ app.post('/addmemfile',(req,res) => {
     const {memid,fileurl,isHero} = req.body
     console.log('add memfile: ',req.body);
     
-    db('memfiles')
-        .returning('id')
-        .insert({
-            memid:memid,
-            fileurl:fileurl,
-            isHero:isHero
+    db.select('*').from('memfiles').then(data =>{
+        res.json('success : ', data.id)
     })
-    .then(mfiles=> {
-        console.log('made it:',mfiles);
-        
-        if(mfiles.length > 0){
-            res.json({
-                wasAdded:true,
-                id:mfiles[0]
-            })
-        }else{
-            res.json({
-                wasAdded:false,
-                id:0
-            })
-        }
+    // db('memfiles')
+    //     .returning('id')
+    //     .insert({
+    //         memid:memid,
+    //         fileurl:fileurl,
+    //         isHero:isHero
+    // })
+    // .then(mfiles=> {
+    //     console.log('made it:',mfiles);
+        // if(mfiles.length > 0){
+        //     res.json({
+        //         wasAdded:true,
+        //         id:mfiles[0]
+        //     })
+        // }else{
+        //     res.json({
+        //         wasAdded:false,
+        //         id:0
+        //     })
+        // }
     })
         .catch(err=> json(err))
 })
