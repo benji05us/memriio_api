@@ -167,7 +167,12 @@ app.post('/addtest',(req,res) => {
     const{memid,fileurl,isHero} = req.body;
     console.log('addtest 2 :',memid,fileurl,isHero);
 
-    res.status(200).json('add test servier side 2')
+    db.select('*').from('users').then(data =>{
+        res.status(200).json(data)
+    }
+        
+
+    
     
 })
 
