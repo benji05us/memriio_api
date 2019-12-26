@@ -166,7 +166,7 @@ app.post('/creatememory',(req,res) => {
 app.post('/addtest',(req,res) => {
 
     console.log('addtest :',req.body);
-    res.json(res.status(200).json('add test servier side'))
+    res.status(200).json('add test servier side')
     
 })
 
