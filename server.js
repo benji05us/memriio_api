@@ -164,9 +164,10 @@ app.post('/creatememory',(req,res) => {
 // test add to mem ---------
 
 app.post('/addtest',(req,res) => {
+    const{memid,fileurl,isHero} = req.body;
+    console.log('addtest 2 :',memid,fileurl,isHero);
 
-    console.log('addtest :',req.body);
-    res.status(200).json('add test servier side')
+    res.status(200).json('add test servier side 2')
     
 })
 
