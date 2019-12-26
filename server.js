@@ -168,7 +168,7 @@ app.post('/addmemfile',(req,res) => {
     console.log('add memfile: ',req.body);
     
     db.select('*').from('memfiles').then(data =>{
-        res.json('success : ', data.id)
+        res.json(data.id)
     }).catch(err=> json(err))
     // db('memfiles')
     //     .returning('id')
