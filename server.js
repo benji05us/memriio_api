@@ -161,6 +161,14 @@ app.post('/creatememory',(req,res) => {
         .catch(err=> json(err))
 })
 
+// test add to mem ---------
+
+app.post('/addtest',(req,res) => {
+
+    console.log('addtest :',req.body);
+    
+})
+
 // load memory file -------------------------------------------------------------
 
 app.post('/addmemfile',(req,res) => {
