@@ -163,18 +163,26 @@ app.post('/creatememory',(req,res) => {
 
 // test add to mem ---------
 
-app.post('/addtest',(req,res) => {
-    const{memid,fileurl,isHero} = req.body;
-    console.log('addtest 2 :',memid,fileurl,isHero);
+app.post('/addmemfile',(req,res) => {
+    const{mid,furl,hero} = req.body;
+    console.log('addtest 3 :',memid,fileurl,isHero);
 
-    db.select('*').from('memfiles').then(data =>{
-        res.status(200).json(data)
+    db('memfiles').returning('*')
+        .insert({
+            memid:mid,
+            fileurl:furl,
+            isHero:hero
+        })
+        .then(data =>{
+            res.status(200).json(data)
+        })
+   
     })
-})
+
 
 // load memory file -------------------------------------------------------------
 
-app.post('/addmemfile',(req,res) => {
+app.post('/test',(req,res) => {
     const {memid,fileurl,isHero} = req.body
     console.log('add memfile: ',req.body);
     
