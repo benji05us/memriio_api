@@ -169,7 +169,7 @@ app.post('/addmemfile',(req,res) => {
     
 
 
-    db('memfiles').returning('*')
+    db('memfiles').returning('id')
         .insert({
             memid:memid,
             fileurl:fileurl,
@@ -177,41 +177,8 @@ app.post('/addmemfile',(req,res) => {
         })
         .then(data =>{
             res.status(200).json(data)
-        })
-    })
-
-
-// load memory file -------------------------------------------------------------
-
-app.post('/test',(req,res) => {
-    const {memid,fileurl,isHero} = req.body
-    console.log('add memfile: ',req.body);
-    
-    db.select('*').from('memfiles').then(data =>{
-        res.json(data.id)
-    }).catch(err=> json(err))
-    // db('memfiles')
-    //     .returning('id')
-    //     .insert({
-    //         memid:memid,
-    //         fileurl:fileurl,
-    //         isHero:isHero
-    // })
-    // .then(mfiles=> {
-    //     console.log('made it:',mfiles);
-        // if(mfiles.length > 0){
-        //     res.json({
-        //         wasAdded:true,
-        //         id:mfiles[0]
-        //     })
-        // }else{
-        //     res.json({
-        //         wasAdded:false,
-        //         id:0
-        //     })
-        // }
-    })
-        
+        }).catch(err => res.status(400).json(err))
+    })  
 
 // associate ----------------------------------------------------------------
 
