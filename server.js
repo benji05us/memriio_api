@@ -165,7 +165,7 @@ app.post('/creatememory',(req,res) => {
 
 app.post('/addmemfile',(req,res) => {
     const{mid,furl,hero} = req.body;
-    console.log('addtest 3 :',memid,fileurl,isHero);
+    console.log('addtest 3 :',mid,furl,hero);
 
     db('memfiles').returning('*')
         .insert({
@@ -176,7 +176,6 @@ app.post('/addmemfile',(req,res) => {
         .then(data =>{
             res.status(200).json(data)
         })
-   
     })
 
 
