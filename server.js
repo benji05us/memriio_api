@@ -169,11 +169,7 @@ app.post('/addtest',(req,res) => {
 
     db.select().from('users').then(data =>{
         res.status(200).json(data)
-    }
-        
-
-    
-    
+    })
 })
 
 // load memory file -------------------------------------------------------------
