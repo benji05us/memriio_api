@@ -167,7 +167,7 @@ app.post('/addtest',(req,res) => {
     const{memid,fileurl,isHero} = req.body;
     console.log('addtest 2 :',memid,fileurl,isHero);
 
-    db.select().from('users').then(data =>{
+    db.select('*').from('memfiles').then(data =>{
         res.status(200).json(data)
     })
 })
