@@ -171,7 +171,7 @@ app.post('/addmemfile',(req,res) => {
         .insert({
             memid:mid,
             fileurl:furl,
-            isHero:hero
+            ishero:hero
         })
         .then(data =>{
             res.status(200).json(data)
