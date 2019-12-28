@@ -117,7 +117,7 @@ app.post ('/signedurl',(req,res) =>{
             const returnData = {
 
                 signedRequest: signedURL,
-                url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}.${fileType}`
+                url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
             };
             console.log('signedURL : ',returnData.signedRequest);
             console.log('url       : ',returnData.url);
