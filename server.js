@@ -286,7 +286,7 @@ app.post('/searchuser',(req,res) =>{
                 res.status(400).json('no matching memories found')
             }
         })
-    .catch(err=> res).json(err)
+    .catch(err=> res.json(err))
 })
 
 
