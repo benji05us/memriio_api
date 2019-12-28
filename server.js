@@ -272,8 +272,9 @@ app.post('/searchuser',(req,res) =>{
     
     // id,groupid,userid,herourl
     db.select('memories.id','memories.groupid','memories.userid','memfiles.fileurl')
-    .join('memfiles', {'memfiles.memid': 'memories.id'})
-    console.log(db.toSQL().toNative())
+    .from('memories')
+    .join('memfiles', {'memfiles.memid':'memories.id'}).where({userid:userid})
+    
     
 
     // db.select('memories.id','memories.groupid','memories.userid','memfiles.fileurl')
