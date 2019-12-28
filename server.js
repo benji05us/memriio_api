@@ -267,6 +267,8 @@ app.post('/search',(req,res) =>{
 app.post('/searchuser',(req,res) =>{
 
     const {userid} = req.body
+    console.log('search user',userid);
+    
     
     // id,groupid,userid,herourl
     db.select('memories.id','memories.groupid','memories.userid','memfiles.fileurl')
@@ -284,7 +286,7 @@ app.post('/searchuser',(req,res) =>{
                 res.status(400).json('no matching memories found')
             }
         })
-    .catch(err=> res.status(400).json('error searching memories'))
+    .catch(err=> res).json(err)
 })
 
 
