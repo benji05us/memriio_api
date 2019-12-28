@@ -281,7 +281,7 @@ app.post('/searchuser',(req,res) =>{
 
     // db.select('*').from('memories').where({userid:userid}).orWhereIn('groupid',function(){
     //         this.select('groupid').from('memberships').where({userid:userid})
-    })
+    //})
         .then(memories=>{
             if(memories.length){
                 res.json(memories)
